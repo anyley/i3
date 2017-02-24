@@ -157,8 +157,9 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 	position bottom 
-        status_command ~/mybar.sh # | dzen2 -fg white -bg black -y 1053 -xs 2 -w 760 -x 1184
+#        status_command ~/mybar.sh # | dzen2 -fg white -bg black -y 1053 -xs 2 -w 760 -x 1184
 #	status_command i3status
+	status_command i3blocks -c ~/.config/i3/i3blocks.conf
         tray_output both
 }
 
