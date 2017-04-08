@@ -1,7 +1,7 @@
 set $mod Mod4
 floating_modifier $mod
 
-exec_always --no-startup-id xrandr --output LVDS1 --mode 1600x900 --pos 0x0 --output HDMI1 --mode 1920x1080 --pos 1600x-400
+#exec_always --no-startup-id xrandr --output LVDS1 --mode 1600x900 --pos 0x0 --output HDMI1 --mode 1920x1080 --pos 1600x-400
 exec_always --no-startup-id xsetroot -solid "#333333"
 exec_always --no-startup-id xset -b
 # exec_always --no-startup-id setxkbmap -option '' &
@@ -167,13 +167,14 @@ bar {
 set $mode_launcher Launch: [F1] htop [F4] gedit [C]hrome [R]ubyMine s[L]ack [S]ococo [T]elegram
 bindsym $mod+F2 mode "$mode_launcher"
 
-mode "$mode_launcher" {
-    bindsym c exec i3-msg workspace $WS2; exec google-chrome; mode default
-    bindsym r exec i3-msg workspace $WS4; exec ~/Downloads/RubyMine-2016.2.1/bin/rubymine.sh &; mode default
-    bindsym s exec i3-msg workspace $WS3; exec sococo &; mode default
-    bindsym l exec i3-msg workspace $WS3; exec slack &; mode default
-    bindsym t exec i3-msg workspace $WS3; exec ~/bin/Telegram &; mode default
-    bindsym F4 exec gedit; mode default
+mode "$mode_launcher" { 
+    bindsym c exec --no-startup-id i3-msg workspace $WS2; exec google-chrome; mode default
+    bindsym r exec --no-startup-id i3-msg workspace $WS4; exec ~/idea-IU/bin/idea.sh
+    #~/Downloads/RubyMine-2016.2.1/bin/rubymine.sh &; mode default
+    bindsym s exec --no-startup-id i3-msg workspace $WS3; exec sococo &; mode default
+    bindsym l exec --no-startup-id i3-msg workspace $WS3; exec slack &; mode default
+    bindsym t exec --no-startup-id i3-msg workspace $WS3; exec ~/bin/Telegram &; mode default
+    bindsym F4 exec --no-startup-id gedit; mode default
     bindsym F1 exec --no-startup-id gnome-terminal -e htop --role=htop --geometry=80x35; mode default
 
     bindsym Escape mode "default"
@@ -200,13 +201,13 @@ bindsym $mod+o scratchpad show
 # kill focused window
 bindsym Mod1+F4 kill
 
-bindsym Mod1+Down exec /usr/bin/pactl set-sink-volume 7 -5%
-bindsym Mod1+Up exec /usr/bin/pactl set-sink-volume 7 +5%
+bindsym Mod1+Down exec amixer -q sset Master 1- #/usr/bin/pactl set-sink-volume 1 -5%
+bindsym Mod1+Up exec amixer -q sset Master 1+ #/usr/bin/pactl set-sink-volume 1 +5%
 # bindsym XF86AudioMute exec /usr/bin/pactl set-sink-volume 1 0
 
 bindsym $mod+F1 bar mode toggle
 bindsym $mod+Shift+s exec ~/i3++.py
-bindsym Mod1+Return exec --no-startup-id xfce4-appfinder
+bindsym $mod+Escape exec --no-startup-id xfce4-appfinder
 
 bindsym F12 resize grow width; resize grow height
 bindsym Shift+F12 resize shrink width; resize shrink height
